@@ -12,6 +12,7 @@
     "express": "^4.16.3"
   },
   "devDependencies": {
+    "mime-types": "^2.1.18",
     "nodemon": "^1.17.4"
   }
 }
