@@ -4,36 +4,21 @@ const express = require('express');
 const path = require('path');
 const router = express.Router();
 const fs = require('fs');
-const mime = require('mime-types');
 
-let htmlPath = path.join(__dirname, 'index.html');
+const mw = require('./imgMiddleWare');
 
-// the image base
-let imagesLinks = [
-    '/the-beast.gif',
-    '/the-cat.jpg',
-    '/the-monster.png'
-];
+let htmlPath = path.join(__dirname, '/static/html/index.html');
 
 // send files via static
-// router.use(express.static(path.join(__dirname, '/static')));
-
-// send files via streams
-router.get('/image/:img', (req, res)=>{
-    let beastParam = req.params.img;
-    if(imagesLinks.includes(`/${beastParam}`)){
-        let beastMime = mime.contentType(path.join(__dirname, beastParam).split(';')[0]); 
-        let beastStream = fs.createReadStream(path.join(__dirname, 'static', beastParam));
-        res.writeHead(200, {"Content-Type": beastMime});
-        beastStream.pipe(res);
-    } else {
-        res.send('No such image');  // error middlleware handler here!!!!!!!!!!!!!!!!!!!!!!!!
-    } 
-});
+// router.use(express.static(path.join(__dirname, '/static/img')));
 
 // send index page in response
 router.get('/', (req, res)=>{
     fs.createReadStream(htmlPath).pipe(res);
+});
+
+router.get('/*', (req, res) => {
+    res.send('Default page. \n  Nothing to look for here');
 });
 
 module.exports = router;
