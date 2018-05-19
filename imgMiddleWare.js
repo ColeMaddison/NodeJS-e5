@@ -9,7 +9,6 @@ const mime = require('mime-types');
 // 404 html
 let htmlErr = path.join(__dirname, 'static/html/404.html');
 
-
 // the image base
 let imagesLinks = [
     '/the-beast.gif',
@@ -18,7 +17,7 @@ let imagesLinks = [
 ];
 
 // send files via streams
-app.use('/image/:img', (req, res)=>{
+app.use('/image/:img', (req, res, next)=>{
     let beastParam = req.params.img;
     if(imagesLinks.includes(`/${beastParam}`)){
         let beastMime = mime.contentType(path.join(__dirname, beastParam).split(';')[0]); 

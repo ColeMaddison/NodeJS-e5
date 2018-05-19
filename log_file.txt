@@ -1,0 +1,4 @@
+Start of the log file:
+
+Sending start time: 01:58:58 2018-5-20
+::1 - - [19/May/2018:23:13:48 +0000] "GET / HTTP/1.1" 200 - "-" "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:60.0) Gecko/20100101 Firefox/60.0"

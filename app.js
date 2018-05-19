@@ -1,12 +1,20 @@
 'use strict';
 
 const express = require('express');
+const path = require('path');
 const router = require('./routs');
-const mw = require('./imgMiddleWare');
+const fs = require('fs');
+const morgan = require('morgan');
+
 
 const app = express();
 
-app.use(mw);
+// app.use(mw); -- is in routs
+
+// logger
+var accessLogStream = fs.createWriteStream(path.join(__dirname, 'log_file.log'), {flags: 'a'})
+app.use(morgan(':date | :status | :response-time ms | :user-agent', {stream: accessLogStream }));
+
 app.use(router);
 
 const PORT = process.env.PORT || 3000;
